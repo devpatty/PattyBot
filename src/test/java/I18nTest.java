@@ -14,9 +14,9 @@
  * along with Mantaro.  If not, see http://www.gnu.org/licenses/
  */
 
-import net.kodehawa.mantarobot.core.command.i18n.I18nContext;
-import net.kodehawa.mantarobot.db.entities.MongoGuild;
-import net.kodehawa.mantarobot.utils.LanguageKeyNotFoundException;
+import net.devpatty.PattyBot.core.command.i18n.I18nContext;
+import net.devpatty.PattyBot.db.entities.MongoGuild;
+import net.devpatty.PattyBot.utils.LanguageKeyNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
