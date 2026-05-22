@@ -17,9 +17,9 @@
 
 <configuration debug="false">
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs/mantaro.log</file>
+        <file>logs/pattybot.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/mantaro.%d{yyyyMMdd}.log</fileNamePattern>
+            <fileNamePattern>logs/pattybot.%d{yyyyMMdd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
