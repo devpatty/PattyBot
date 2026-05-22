@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2016 Kodehawa
+ * Copyright (C) 2026 DevPatty
  *
- * Mantaro is free software: you can redistribute it and/or modify
+ * PattyBot is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -15,10 +15,10 @@
  *
  */
 
-package net.kodehawa.mantarobot;
+package net.devpatty.pattybot;
 
-public final class MantaroInfo {
-    public static final String GITHUB_URL = "https://github.com/Mantaro/MantaroBot";
+public final class PattyBotInfo {
+    public static final String GITHUB_URL = "https://github.com/devpatty/PattyBot";
     public static final String USER_AGENT = "Mantaro/@version@/JDA-DiscordBot (" + GITHUB_URL + ")";
     public static final String VERSION = "@version@";
     public static final String GIT_REVISION = "@revision@";
