@@ -1,7 +1,7 @@
 /*
- * Copyright (C) 2016 Kodehawa
+ * Copyright (C) 2026 DevPatty
  *
- * Mantaro is free software: you can redistribute it and/or modify
+ * PattyBot is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -11,11 +11,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Mantaro. If not, see http://www.gnu.org/licenses/
+ * along with PattyBot. If not, see http://www.gnu.org/licenses/
  *
  */
 
-package net.kodehawa.mantarobot;
+package net.devpatty.pattybot;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import dev.arbjerg.lavalink.client.LavalinkClient;
@@ -25,23 +25,23 @@ import net.dv8tion.jda.api.requests.ErrorResponse;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.dv8tion.jda.api.utils.MiscUtil;
-import net.kodehawa.lib.imageboards.ImageBoard;
-import net.kodehawa.mantarobot.commands.currency.item.ItemHelper;
-import net.kodehawa.mantarobot.commands.music.MantaroAudioManager;
-import net.kodehawa.mantarobot.commands.utils.birthday.BirthdayCacher;
-import net.kodehawa.mantarobot.commands.utils.birthday.BirthdayTask;
-import net.kodehawa.mantarobot.commands.utils.polls.PollTask;
-import net.kodehawa.mantarobot.commands.utils.reminders.ReminderTask;
-import net.kodehawa.mantarobot.core.MantaroCore;
-import net.kodehawa.mantarobot.core.MantaroEventManager;
-import net.kodehawa.mantarobot.data.Config;
-import net.kodehawa.mantarobot.data.MantaroData;
-import net.kodehawa.mantarobot.utils.Prometheus;
-import net.kodehawa.mantarobot.utils.TracingPrintStream;
-import net.kodehawa.mantarobot.utils.Utils;
-import net.kodehawa.mantarobot.utils.commands.ratelimit.RatelimitUtils;
-import net.kodehawa.mantarobot.utils.exporters.Metrics;
-import net.kodehawa.mantarobot.utils.log.LogUtils;
+import net.devpatty.lib.imageboards.ImageBoard;
+import net.devpatty.pattybot.commands.currency.item.ItemHelper;
+import net.devpatty.pattybot.commands.music.PattyBotAudioManager;
+import net.devpatty.pattybot.commands.utils.birthday.BirthdayCacher;
+import net.devpatty.pattybot.commands.utils.birthday.BirthdayTask;
+import net.devpatty.pattybot.commands.utils.polls.PollTask;
+import net.devpatty.pattybot.commands.utils.reminders.ReminderTask;
+import net.devpatty.pattybot.core.PattyBotCore;
+import net.devpatty.pattybot.core.PattyBotEventManager;
+import net.devpatty.pattybot.data.Config;
+import net.devpatty.pattybot.data.PattyBotData;
+import net.devpatty.pattybot.utils.Prometheus;
+import net.devpatty.pattybot.utils.TracingPrintStream;
+import net.devpatty.pattybot.utils.Utils;
+import net.devpatty.pattybot.utils.commands.ratelimit.RatelimitUtils;
+import net.devpatty.pattybot.utils.exporters.Metrics;
+import net.devpatty.pattybot.utils.log.LogUtils;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
@@ -62,18 +62,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static net.kodehawa.mantarobot.utils.ShutdownCodes.API_HANDSHAKE_FAILURE;
-import static net.kodehawa.mantarobot.utils.ShutdownCodes.FATAL_FAILURE;
+import static net.devpatty.pattybot.utils.ShutdownCodes.API_HANDSHAKE_FAILURE;
+import static net.devpatty.pattybot.utils.ShutdownCodes.FATAL_FAILURE;
 
 @SuppressWarnings("SameReturnValue")
-public class MantaroBot {
-    private static final Logger log = LoggerFactory.getLogger(MantaroBot.class);
-    private static MantaroBot instance;
+public class PattyBot {
+    private static final Logger log = LoggerFactory.getLogger(PattyBot.class);
+    private static PattyBot instance;
 
     // Just in case
     static {
-        log.info("Starting up Mantaro {}, Git revision: {}", MantaroInfo.VERSION, MantaroInfo.GIT_REVISION);
-        log.info("Reporting UA {} for HTTP requests.", MantaroInfo.USER_AGENT);
+        log.info("Starting up PattyBot {}, Git revision: {}", PattyBotInfo.VERSION, PattyBotInfo.GIT_REVISION);
+        log.info("Reporting UA {} for HTTP requests.", PattyBotInfo.USER_AGENT);
 
         if (ExtraRuntimeOptions.VERBOSE) {
             System.setOut(new TracingPrintStream(System.out));
@@ -91,10 +91,10 @@ public class MantaroBot {
         }
     }
 
-    private final MantaroAudioManager audioManager;
-    private final MantaroCore core;
+    private final PattyBotAudioManager audioManager;
+    private final PattyBotCore core;
     private final LavalinkClient lavaLink;
-    private final Config config = MantaroData.config().get();
+    private final Config config = PattyBotData.config().get();
 
     private final BirthdayCacher birthdayCacher;
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(
